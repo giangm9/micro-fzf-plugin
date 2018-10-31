@@ -18,7 +18,7 @@ end
 function fzf()
 	if CurView():CanClose() then
 		local fzf_output = RunInteractiveShell("fzf", false, true)
-		if not reportedExitCode(fzf_output) then
+		if not (reportedExitCode(fzf_output) or fzf_output == '') then
 			local desired_path = removeNewlines(fzf_output)
 			CurView():Open(desired_path)
 			messenger:Message("Opened "..desired_path)
